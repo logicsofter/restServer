@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class BetterRestImpl { //implements BetRest {
+public class BetterRestImpl implements BetRest {
 
 	public Integer healthCheck(String callerID) 
 	{
@@ -26,7 +26,7 @@ public class BetterRestImpl { //implements BetRest {
 	public AccountResp makePayment(AccountDetails myAccount)
 	{
 		System.out.println( "Account " + myAccount.toString() + "\n");
-		return new AccountResp("Savings", "1000", false);//, new AccountTx("Withdraw", "123456", 3));
+		return new AccountResp("Savings", "1000", false, new AccountTx("Savings", "123456", 3));
 	}
 	
 	public String simpleProc(Simple sim)
@@ -48,9 +48,6 @@ public class BetterRestImpl { //implements BetRest {
 			System.out.println("Server Received: " + sim.getName());
 		}
 		
-		AccountResp resp = new AccountResp("Withdrawl", "1000", false);
-		String retVal = gson.toJson(resp);		
-		
 		ResponseBuilder respB = Response.ok();
 		respB.entity("All is well");
 		return respB.build();
@@ -65,11 +62,11 @@ public class BetterRestImpl { //implements BetRest {
 			System.out.println("Server Received: " + sim.getName());
 		}
 		
-		AccountResp resp = new AccountResp("Withdrawl", "1000", false);
+		AccountResp resp = new AccountResp("Withdrawl", "1000", false, new AccountTx("Withdraw", "654322", 2));
 		String retVal = gson.toJson(resp);		
 		
 		ResponseBuilder respB = Response.ok();
-		respB.entity("All is well");
+		respB.entity(retVal);
 		return respB.build();
 	}
 
