@@ -22,10 +22,12 @@
 		skipFaultLogging="true">	
 		<cxf:providers>
             <ref bean="jsonProvider" />
+            <ref bean="jsonException"/>
          </cxf:providers>
 	</cxf:rsServer>
 
 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+	<bean id="jsonException" class="com.softlogic.rs.JSONParseExceptionMapper"/>
 	
 <!--            <ref bean="formUrlEncodeProvider" />  -->
 <!-- 	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider"/> -->
